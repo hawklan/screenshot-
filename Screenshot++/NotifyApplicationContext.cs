@@ -25,13 +25,18 @@ namespace Screenshot__
         private void InitializeContext()
         {
             m_components = new System.ComponentModel.Container();
-            m_notifyIcon = new NotifyIcon(m_components)
+            m_notifyIcon = new NotifyIcon(m_components);
+            m_notifyIcon.ContextMenuStrip = new ContextMenuStrip();
+            try
             {
-                ContextMenuStrip = new ContextMenuStrip(),
-                Icon = Icon.ExtractAssociatedIcon("C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe"), // new Icon()
-                Text = "Default tooltip",
-                Visible = true,
-            };
+                m_notifyIcon.Icon = Icon.ExtractAssociatedIcon("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
+            }
+            catch (Exception)
+            {
+                m_notifyIcon.Icon = Icon.ExtractAssociatedIcon("C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe"); // new Icon()
+            }
+            m_notifyIcon.Text = "Default tooltip";
+            m_notifyIcon.Visible = true;
             m_notifyIcon.ContextMenuStrip.Opening += ContextMenuStrip_Opening;
             m_notifyIcon.DoubleClick += NotifyIcon_DoubleClick;
 
