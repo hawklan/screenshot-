@@ -28,7 +28,7 @@ namespace Screenshot__
                     EncoderParameters encParams = new EncoderParameters(1);
                     encParams.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, (long)75);
 
-                    bmp.Save(GetNextFileName(AppendTimestamp("Screenshot++"), ".jpg"), GetEncoder(ImageFormat.Jpeg), encParams);
+                    bmp.Save(GetNextFileName(AppendTimestamp(Settings.FilePrefix), Settings.SelectedImageFormat.Extension, Settings.SavePath), GetEncoder(Settings.SelectedImageFormat.Format), encParams);
                 }
             }
             else if (nCode >= 0 && wParam == (IntPtr)WindowMessages.WM_KEYDOWN)
@@ -44,7 +44,7 @@ namespace Screenshot__
                     EncoderParameters encParams = new EncoderParameters(1);
                     encParams.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, (long)75);
 
-                    bmp.Save(GetNextFileName(AppendTimestamp("Screenshot++"), ".jpg"), GetEncoder(ImageFormat.Jpeg), encParams);
+                    bmp.Save(GetNextFileName(AppendTimestamp(Settings.FilePrefix), Settings.SelectedImageFormat.Extension, Settings.SavePath), GetEncoder(Settings.SelectedImageFormat.Format), encParams);
                 }
             }
             

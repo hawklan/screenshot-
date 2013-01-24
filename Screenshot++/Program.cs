@@ -16,6 +16,8 @@ namespace Screenshot__
         [STAThread]
         static void Main()
         {
+            Settings.Init();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             InterceptKeys keyHook = new InterceptKeys(Capture.Callback);
