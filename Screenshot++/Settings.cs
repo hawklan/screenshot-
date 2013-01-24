@@ -8,12 +8,17 @@ namespace Screenshot__
 {
     class Settings
     {
-        public struct ImageFormat
+        public class ImageFormat
         {
             public string Description;
             public System.Drawing.Imaging.ImageFormat Format;
             public string Extension;
             public EncoderParameters Parameters;
+
+            public override string ToString()
+            {
+                return Description;
+            }
         }
 
         public static string SavePath = "./";
@@ -23,7 +28,7 @@ namespace Screenshot__
 
         public static void Init()
         {
-            ImageFormat jpg75;
+            ImageFormat jpg75 = new ImageFormat();
             jpg75.Description = "JPG";
             jpg75.Format = System.Drawing.Imaging.ImageFormat.Jpeg;
             jpg75.Extension = ".jpg";
@@ -32,7 +37,7 @@ namespace Screenshot__
             jpg75.Parameters = encParamsjpg75;
             Settings.ImageFormats.Add(jpg75);
 
-            ImageFormat png;
+            ImageFormat png = new ImageFormat();
             png.Description = "PNG";
             png.Format = System.Drawing.Imaging.ImageFormat.Png;
             png.Extension = ".png";

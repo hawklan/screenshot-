@@ -48,6 +48,7 @@ namespace Screenshot__
 
             m_notifyIcon.ContextMenuStrip.Items.Clear();
             m_notifyIcon.ContextMenuStrip.Items.Add(this.ToolStripMenuItemWithHandler("&Options", OptionsItem_Click));
+            m_notifyIcon.ContextMenuStrip.Items.Add(this.ToolStripMenuItemWithHandler("&About", AboutItem_Click));
             m_notifyIcon.ContextMenuStrip.Items.Add(new ToolStripSeparator());
             m_notifyIcon.ContextMenuStrip.Items.Add(this.ToolStripMenuItemWithHandler("E&xit", ExitItem_Click));
         }
@@ -59,6 +60,14 @@ namespace Screenshot__
 
         private void OptionsItem_Click(object sender, EventArgs e)
         {
+            Options options = new Options();
+            options.Show();
+        }
+
+        private void AboutItem_Click(object sender, EventArgs e)
+        {
+            // Replace this with a proper form later.
+            MessageBox.Show(string.Format("{0} v{1} by {2}", Assembly.GetExecutingAssembly().GetName().Name, Assembly.GetExecutingAssembly().GetName().Version, "Jason Hutton"));
         }
 
         private void ExitItem_Click(object sender, EventArgs e)
