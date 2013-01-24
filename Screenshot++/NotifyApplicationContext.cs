@@ -15,6 +15,7 @@ namespace Screenshot__
         private NotifyIcon m_notifyIcon;
         private System.ComponentModel.IContainer m_components;
 
+        
         public NotifyApplicationContext()
         {
             InitializeContext();
