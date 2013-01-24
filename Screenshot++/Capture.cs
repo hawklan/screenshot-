@@ -20,7 +20,15 @@ namespace Screenshot__
                 int vkCode = Marshal.ReadInt32(lParam);
                 if ((Keys)vkCode == Keys.PrintScreen) // 44
                 {
-                    Console.WriteLine((Keys)vkCode);
+                    //Rectangle rect = SystemInformation.VirtualScreen;
+                    IntPtr hRegion = GetRegionWindow(true);
+                    Rectangle rect = GetWindowRectangle(hRegion);
+                    Bitmap bmp = CaptureRegion(hRegion, rect.Width, rect.Height);
+
+                    EncoderParameters encParams = new EncoderParameters(1);
+                    encParams.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, (long)75);
+
+                    bmp.Save(GetNextFileName(AppendTimestamp("Screenshot++"), ".jpg"), GetEncoder(ImageFormat.Jpeg), encParams);
                 }
             }
             else if (nCode >= 0 && wParam == (IntPtr)WindowMessages.WM_KEYDOWN)
@@ -29,7 +37,9 @@ namespace Screenshot__
                 if ((Keys)vkCode == Keys.PrintScreen) // 44
                 {
                     Rectangle rect = SystemInformation.VirtualScreen;
-                    Bitmap bmp = CaptureRegion(rect.Left, rect.Top, rect.Width, rect.Height);
+                    IntPtr hRegion = GetRegionWindow(false);
+                    //Rectangle rect = GetWindowRectangle(hRegion);
+                    Bitmap bmp = CaptureRegion(hRegion, rect.Width, rect.Height);
 
                     EncoderParameters encParams = new EncoderParameters(1);
                     encParams.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, (long)75);
@@ -74,10 +84,29 @@ namespace Screenshot__
             return null;
         }
 
-        public static Bitmap CaptureRegion(int x, int y, int w, int h)
+        public static IntPtr GetRegionWindow(bool bActiveOnly = false)
         {
-            IntPtr hDesktop = GetDesktopWindow();
-            IntPtr hSourceDC = GetWindowDC(hDesktop);
+            IntPtr hWnd = IntPtr.Zero;
+            if (bActiveOnly)
+                hWnd = GetForegroundWindow();
+            if (hWnd == null || hWnd == IntPtr.Zero)
+                hWnd = GetDesktopWindow();
+
+            return hWnd;
+        }
+
+        public static Rectangle GetWindowRectangle(IntPtr hWnd)
+        {
+            RECT uRect;
+            GetWindowRect(hWnd, out uRect);
+            int error = Marshal.GetLastWin32Error();
+            Rectangle rect = new Rectangle(uRect.Left, uRect.Top, uRect.Right - uRect.Left, uRect.Bottom - uRect.Top);
+            return rect;
+        }
+
+        public static Bitmap CaptureRegion(IntPtr hWnd, int w, int h, int x = 0, int y = 0)
+        {
+            IntPtr hSourceDC = GetWindowDC(hWnd);
             IntPtr hDestinationDC = CreateCompatibleDC(hSourceDC);
             IntPtr hBitmap = CreateCompatibleBitmap(hSourceDC, w, h);
             IntPtr hOldBitmap = SelectObject(hDestinationDC, hBitmap);
@@ -85,7 +114,7 @@ namespace Screenshot__
             Bitmap bmp = Bitmap.FromHbitmap(hBitmap);
             SelectObject(hDestinationDC, hOldBitmap);
             DeleteObject(hBitmap);
-            ReleaseDC(hDesktop, hSourceDC);
+            ReleaseDC(hWnd, hSourceDC);
 
             return bmp; // Dispose?
         }
@@ -108,5 +137,20 @@ namespace Screenshot__
         public static extern IntPtr GetDesktopWindow();
         [DllImport("user32.dll")]
         public static extern IntPtr GetWindowDC(IntPtr ptr);
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool GetWindowRect(IntPtr hwnd, out RECT lpRect);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct RECT
+        {
+            public int Left;
+            public int Top;
+            public int Right;
+            public int Bottom;
+        }
     }
 }
