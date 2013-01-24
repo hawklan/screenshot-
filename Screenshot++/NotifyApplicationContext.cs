@@ -40,6 +40,8 @@ namespace Screenshot__
         {
             e.Cancel = false;
 
+            m_notifyIcon.ContextMenuStrip.Items.Clear();
+            m_notifyIcon.ContextMenuStrip.Items.Add(this.ToolStripMenuItemWithHandler("&Options", OptionsItem_Click));
             m_notifyIcon.ContextMenuStrip.Items.Add(new ToolStripSeparator());
             m_notifyIcon.ContextMenuStrip.Items.Add(this.ToolStripMenuItemWithHandler("E&xit", ExitItem_Click));
         }
@@ -47,6 +49,10 @@ namespace Screenshot__
         private void NotifyIcon_DoubleClick(object sender, EventArgs e)
         {
             // Do nothing for now.
+        }
+
+        private void OptionsItem_Click(object sender, EventArgs e)
+        {
         }
 
         private void ExitItem_Click(object sender, EventArgs e)
