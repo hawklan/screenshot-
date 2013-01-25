@@ -29,7 +29,7 @@ namespace Screenshot__
             bool bChanges = false;
             if (!txtSavePath.Text.Equals(Settings.SavePath))
             {
-                if (Uri.IsWellFormedUriString(txtSavePath.Text, UriKind.RelativeOrAbsolute))
+                if(txtSavePath.Text.IndexOfAny(System.IO.Path.GetInvalidPathChars()) == -1)
                 {
                     Settings.SavePath = txtSavePath.Text;
                     bChanges = true;
@@ -57,7 +57,23 @@ namespace Screenshot__
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
+            FolderBrowserDialog folderBrowse = new FolderBrowserDialog();
+            
+            if (txtSavePath.Text.IndexOfAny(System.IO.Path.GetInvalidPathChars()) == -1)
+            {
+                if (System.IO.Directory.Exists(txtSavePath.Text))
+                {
+                    folderBrowse.SelectedPath = txtSavePath.Text;
+                }
+            }
 
+            if (folderBrowse.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (folderBrowse.SelectedPath.IndexOfAny(System.IO.Path.GetInvalidPathChars()) == -1)
+                {
+                    txtSavePath.Text = folderBrowse.SelectedPath;
+                }
+            }
         }
     }
 }

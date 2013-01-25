@@ -27,8 +27,14 @@ namespace Screenshot__
 
                     EncoderParameters encParams = new EncoderParameters(1);
                     encParams.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, (long)75);
+                    
+                    if (!Directory.Exists(Settings.SavePath))
+                        Directory.CreateDirectory(Settings.SavePath);
 
-                    bmp.Save(GetNextFileName(AppendTimestamp(Settings.SavePrefix), Settings.SelectedImageFormat.Extension, Settings.SavePath), GetEncoder(Settings.SelectedImageFormat.Format), encParams);
+                    if (Directory.Exists(Settings.SavePath))
+                    {
+                        bmp.Save(GetNextFileName(AppendTimestamp(Settings.SavePrefix), Settings.SelectedImageFormat.Extension, Settings.SavePath), GetEncoder(Settings.SelectedImageFormat.Format), encParams);
+                    }
                     bmp.Dispose();
                 }
             }
@@ -44,8 +50,14 @@ namespace Screenshot__
 
                     EncoderParameters encParams = new EncoderParameters(1);
                     encParams.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, (long)75);
+                    
+                    if (!Directory.Exists(Settings.SavePath))
+                        Directory.CreateDirectory(Settings.SavePath);
 
-                    bmp.Save(GetNextFileName(AppendTimestamp(Settings.SavePrefix), Settings.SelectedImageFormat.Extension, Settings.SavePath), GetEncoder(Settings.SelectedImageFormat.Format), encParams);
+                    if(Directory.Exists(Settings.SavePath))
+                    {
+                        bmp.Save(GetNextFileName(AppendTimestamp(Settings.SavePrefix), Settings.SelectedImageFormat.Extension, Settings.SavePath), GetEncoder(Settings.SelectedImageFormat.Format), encParams);
+                    }
                     bmp.Dispose();
                 }
             }
@@ -59,7 +71,7 @@ namespace Screenshot__
             return string.Format("{0} {1}-{2}-{3}_{4}h{5}m{6}s", str, date.Year.ToString("d4"), date.Month.ToString("d2"), date.Day.ToString("d2"), date.Hour, date.Minute, date.Second);
         }
 
-        public static string GetNextFileName(string baseFilename, string extension, string path = "./")
+        public static string GetNextFileName(string baseFilename, string extension, string path)
         {
             string combinedFilename = string.Format("{0}{1}", baseFilename, extension);
             string cPath = Path.Combine(path, combinedFilename);

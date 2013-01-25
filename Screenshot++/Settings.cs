@@ -22,7 +22,7 @@ namespace Screenshot__
             }
         }
 
-        public static string SavePath = "./";
+        public static string SavePath = Environment.CurrentDirectory;
         public static string SavePrefix = "Screenshot++";
         public static List<ImageFormat> ImageFormats = new List<ImageFormat>();
         public static ImageFormat SelectedImageFormat;
@@ -98,7 +98,7 @@ namespace Screenshot__
                                         str2 += str[i] += " ";
                                     }
                                     str2 = str2.Trim();
-                                    if (Uri.IsWellFormedUriString(str2, UriKind.RelativeOrAbsolute))
+                                    if(str2.IndexOfAny(System.IO.Path.GetInvalidPathChars()) == -1)
                                     {
                                         SavePath = str2;
                                     }
