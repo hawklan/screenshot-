@@ -60,7 +60,7 @@ namespace Screenshot__
         private void AboutItem_Click(object sender, EventArgs e)
         {
             // Replace this with a proper form later.
-            MessageBox.Show(string.Format("{0} v{1} by {2}", Assembly.GetExecutingAssembly().GetName().Name, Assembly.GetExecutingAssembly().GetName().Version, "Jason Hutton"));
+            MessageBox.Show(string.Format("{0} v{1} by {2}", Assembly.GetExecutingAssembly().GetName().Name, Assembly.GetExecutingAssembly().GetName().Version, Settings.Author));
         }
 
         private void ExitItem_Click(object sender, EventArgs e)

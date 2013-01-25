@@ -26,6 +26,8 @@ namespace Screenshot__
         public static List<ImageFormat> ImageFormats = new List<ImageFormat>();
         public static ImageFormat SelectedImageFormat;
 
+        public const string Author = "Jason Hutton";
+
         public static void Init()
         {
             ImageFormat jpg75 = new ImageFormat();
