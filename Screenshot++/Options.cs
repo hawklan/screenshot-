@@ -36,12 +36,25 @@ namespace Screenshot__
 
         private void btnOK_Click(object sender, EventArgs e)
         {
-
+            if (!txtSavePath.Text.Equals(Settings.SavePath))
+            {
+                if (Uri.IsWellFormedUriString(txtSavePath.Text, UriKind.RelativeOrAbsolute))
+                {
+                    Settings.SavePath = txtSavePath.Text;
+                }
+            }
+            if (!txtSavePrefix.Text.Equals(Settings.FilePrefix))
+            {
+                if (txtSavePrefix.Text.IndexOfAny(System.IO.Path.GetInvalidFileNameChars()) != -1)
+                {
+                    Settings.FilePrefix = txtSavePrefix.Text;
+                }
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)

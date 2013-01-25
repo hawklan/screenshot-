@@ -10,7 +10,7 @@ namespace Screenshot__
 {
     class InterceptKeys
     {
-        //private LowLevelKeyboardProc _proc;// = HookCallback;
+        private LowLevelKeyboardProc m_proc; // Just keeps a reference alive so the garbage collector doesn't kill it while unmanaged code is at work.
         private Func<int, IntPtr, IntPtr, bool> Callback;
         private IntPtr _hookID = IntPtr.Zero;
 
@@ -23,14 +23,16 @@ namespace Screenshot__
         ~InterceptKeys()
         {
             UnhookWindowsHookEx(this._hookID);
+            m_proc = null;
         }
 
-        private static IntPtr SetHook(LowLevelKeyboardProc proc)
+        private IntPtr SetHook(LowLevelKeyboardProc proc)
         {
             using (Process curProcess = Process.GetCurrentProcess())
             {
                 using (ProcessModule curModule = curProcess.MainModule)
                 {
+                    m_proc = proc;
                     return SetWindowsHookEx(WindowHooks.WH_KEYBOARD_LL, proc, GetModuleHandle(curModule.ModuleName), 0);
                 }
             }
