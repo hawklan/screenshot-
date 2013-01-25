@@ -29,6 +29,7 @@ namespace Screenshot__
                     encParams.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, (long)75);
 
                     bmp.Save(GetNextFileName(AppendTimestamp(Settings.FilePrefix), Settings.SelectedImageFormat.Extension, Settings.SavePath), GetEncoder(Settings.SelectedImageFormat.Format), encParams);
+                    bmp.Dispose();
                 }
             }
             else if (nCode >= 0 && wParam == (IntPtr)WindowMessages.WM_KEYDOWN)
@@ -45,6 +46,7 @@ namespace Screenshot__
                     encParams.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, (long)75);
 
                     bmp.Save(GetNextFileName(AppendTimestamp(Settings.FilePrefix), Settings.SelectedImageFormat.Extension, Settings.SavePath), GetEncoder(Settings.SelectedImageFormat.Format), encParams);
+                    bmp.Dispose();
                 }
             }
             
@@ -116,7 +118,7 @@ namespace Screenshot__
             DeleteObject(hBitmap);
             ReleaseDC(hWnd, hSourceDC);
 
-            return bmp; // Dispose?
+            return bmp;
         }
 
         [DllImport("gdi32.dll")]

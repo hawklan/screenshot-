@@ -15,12 +15,23 @@ namespace Screenshot__
         public Options()
         {
             InitializeComponent();
+            pbLogo.Image = GetBitmap(Screenshot__.Properties.Resources.camera_photo_2);
             //lblAbout.Text = string.Format("{0} v{1}", Settings.ProgramName, Assembly.GetExecutingAssembly().GetName().Version);
             lblAbout.Text = Assembly.GetExecutingAssembly().GetName().Name; // Redundant, but explicit in case of changes later.
             txtSavePath.Text = Settings.SavePath;
             cmbFormat.DataSource = Settings.ImageFormats;
             cmbFormat.SelectedItem = Settings.SelectedImageFormat;
             txtSavePrefix.Text = Settings.FilePrefix;
+        }
+
+        private Bitmap GetBitmap(Icon icon)
+        {
+            Bitmap bmp = new Bitmap(icon.Width, icon.Height);
+            Graphics gxMem = Graphics.FromImage(bmp);
+            gxMem.DrawIcon(icon, 0, 0);
+            gxMem.Dispose();
+
+            return bmp;
         }
 
         private void btnOK_Click(object sender, EventArgs e)

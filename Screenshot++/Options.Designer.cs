@@ -39,6 +39,8 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.lblAbout = new System.Windows.Forms.Label();
             this.btnBrowse = new System.Windows.Forms.Button();
+            this.pbLogo = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // lblSavePath
@@ -52,8 +54,8 @@
             // 
             // txtSavePath
             // 
-            this.txtSavePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSavePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSavePath.Location = new System.Drawing.Point(16, 30);
             this.txtSavePath.Name = "txtSavePath";
             this.txtSavePath.Size = new System.Drawing.Size(377, 20);
@@ -88,8 +90,8 @@
             // 
             // txtSavePrefix
             // 
-            this.txtSavePrefix.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSavePrefix.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSavePrefix.Location = new System.Drawing.Point(147, 69);
             this.txtSavePrefix.Name = "txtSavePrefix";
             this.txtSavePrefix.Size = new System.Drawing.Size(328, 20);
@@ -133,7 +135,7 @@
             // 
             this.lblAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblAbout.AutoSize = true;
-            this.lblAbout.Location = new System.Drawing.Point(16, 143);
+            this.lblAbout.Location = new System.Drawing.Point(67, 139);
             this.lblAbout.Name = "lblAbout";
             this.lblAbout.Size = new System.Drawing.Size(73, 13);
             this.lblAbout.TabIndex = 9;
@@ -150,6 +152,14 @@
             this.btnBrowse.UseVisualStyleBackColor = true;
             this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
+            // pbLogo
+            // 
+            this.pbLogo.Location = new System.Drawing.Point(13, 107);
+            this.pbLogo.Name = "pbLogo";
+            this.pbLogo.Size = new System.Drawing.Size(48, 48);
+            this.pbLogo.TabIndex = 11;
+            this.pbLogo.TabStop = false;
+            // 
             // Options
             // 
             this.AcceptButton = this.btnOK;
@@ -157,6 +167,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(487, 169);
+            this.Controls.Add(this.pbLogo);
             this.Controls.Add(this.btnBrowse);
             this.Controls.Add(this.lblAbout);
             this.Controls.Add(this.btnOK);
@@ -173,6 +184,7 @@
             this.MinimizeBox = false;
             this.Name = "Options";
             this.Text = "Options";
+            ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,5 +203,6 @@
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Label lblAbout;
         private System.Windows.Forms.Button btnBrowse;
+        private System.Windows.Forms.PictureBox pbLogo;
     }
 }

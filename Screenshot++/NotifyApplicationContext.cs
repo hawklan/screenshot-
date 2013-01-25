@@ -27,15 +27,8 @@ namespace Screenshot__
             m_components = new System.ComponentModel.Container();
             m_notifyIcon = new NotifyIcon(m_components);
             m_notifyIcon.ContextMenuStrip = new ContextMenuStrip();
-            try
-            {
-                m_notifyIcon.Icon = Icon.ExtractAssociatedIcon("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
-            }
-            catch (Exception)
-            {
-                m_notifyIcon.Icon = Icon.ExtractAssociatedIcon("C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe"); // new Icon()
-            }
-            m_notifyIcon.Text = "Default tooltip";
+            m_notifyIcon.Icon = Screenshot__.Properties.Resources.camera_photo_2;
+            m_notifyIcon.Text = Assembly.GetExecutingAssembly().GetName().Name; // Redundant, but explicit in case of changes later.
             m_notifyIcon.Visible = true;
             m_notifyIcon.ContextMenuStrip.Opening += ContextMenuStrip_Opening;
             m_notifyIcon.DoubleClick += NotifyIcon_DoubleClick;
