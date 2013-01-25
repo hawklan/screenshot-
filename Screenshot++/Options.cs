@@ -21,7 +21,7 @@ namespace Screenshot__
             txtSavePath.Text = Settings.SavePath;
             cmbFormat.DataSource = Settings.ImageFormats;
             cmbFormat.SelectedItem = Settings.SelectedImageFormat;
-            txtSavePrefix.Text = Settings.FilePrefix;
+            txtSavePrefix.Text = Settings.SavePrefix;
         }
 
         private Bitmap GetBitmap(Icon icon)
@@ -36,19 +36,26 @@ namespace Screenshot__
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+            bool bChanges = false;
             if (!txtSavePath.Text.Equals(Settings.SavePath))
             {
                 if (Uri.IsWellFormedUriString(txtSavePath.Text, UriKind.RelativeOrAbsolute))
                 {
                     Settings.SavePath = txtSavePath.Text;
+                    bChanges = true;
                 }
             }
-            if (!txtSavePrefix.Text.Equals(Settings.FilePrefix))
+            if (!txtSavePrefix.Text.Equals(Settings.SavePrefix))
             {
                 if (txtSavePrefix.Text.IndexOfAny(System.IO.Path.GetInvalidFileNameChars()) == -1)
                 {
-                    Settings.FilePrefix = txtSavePrefix.Text;
+                    Settings.SavePrefix = txtSavePrefix.Text;
+                    bChanges = true;
                 }
+            }
+            if (bChanges)
+            {
+                Settings.SaveSettings();
             }
             this.Close();
         }

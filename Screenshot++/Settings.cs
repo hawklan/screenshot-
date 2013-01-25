@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing.Imaging;
+using System.IO;
 
 namespace Screenshot__
 {
@@ -22,11 +23,14 @@ namespace Screenshot__
         }
 
         public static string SavePath = "./";
-        public static string FilePrefix = "Screenshot++";
+        public static string SavePrefix = "Screenshot++";
         public static List<ImageFormat> ImageFormats = new List<ImageFormat>();
         public static ImageFormat SelectedImageFormat;
 
         public const string Author = "Jason Hutton";
+
+        public const string AppSavePath = "./";
+        public const string SettingsFile = "settings.cfg";
 
         public static void Init()
         {
@@ -62,6 +66,88 @@ namespace Screenshot__
                     SelectedImageFormat = ImageFormats[0];
                 }
             }
+
+            if (!LoadSettings())
+            {
+                SaveSettings();
+            }
+        }
+
+        public static bool LoadSettings()
+        {
+            TextReader tr;
+            try
+            {
+                tr = new StreamReader(Path.Combine(AppSavePath, SettingsFile));
+                string line = null;
+                while ((line = tr.ReadLine()) != null)
+                {
+                    string[] str = line.Split(null);
+                    if (str.Length > 1)
+                    {
+                        switch (str[0].ToUpper())
+                        {
+                            case "//":
+                            case "#":
+                                break;
+                            case "SAVEPATH":
+                                {
+                                    string str2 = "";
+                                    for (int i = 1; i < str.Length; i++)
+                                    {
+                                        str2 += str[i] += " ";
+                                    }
+                                    str2 = str2.Trim();
+                                    if (Uri.IsWellFormedUriString(str2, UriKind.RelativeOrAbsolute))
+                                    {
+                                        SavePath = str2;
+                                    }
+                                }
+                                break;
+                            case "SAVEPREFIX":
+                                {
+                                    string str2 = "";
+                                    for (int i = 1; i < str.Length; i++)
+                                    {
+                                        str2 += str[i] += " ";
+                                    }
+                                    str2 = str2.Trim();
+                                    if (str2.IndexOfAny(System.IO.Path.GetInvalidFileNameChars()) == -1)
+                                    {
+                                        SavePrefix = str2;
+                                    }
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                tr.Close();
+            }
+            catch (DirectoryNotFoundException)
+            {
+                return false;
+            }
+            catch (FileNotFoundException)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public static void SaveSettings()
+        {
+            TextWriter tw;
+            //try
+            {
+                tw = new StreamWriter(Path.Combine(AppSavePath, SettingsFile));
+                tw.WriteLine(string.Format("{0} {1}", "SavePath", SavePath));
+                tw.WriteLine(string.Format("{0} {1}", "SavePrefix", SavePrefix));
+                tw.Close();
+            }
+            
         }
     }
 }

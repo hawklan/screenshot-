@@ -28,7 +28,7 @@ namespace Screenshot__
                     EncoderParameters encParams = new EncoderParameters(1);
                     encParams.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, (long)75);
 
-                    bmp.Save(GetNextFileName(AppendTimestamp(Settings.FilePrefix), Settings.SelectedImageFormat.Extension, Settings.SavePath), GetEncoder(Settings.SelectedImageFormat.Format), encParams);
+                    bmp.Save(GetNextFileName(AppendTimestamp(Settings.SavePrefix), Settings.SelectedImageFormat.Extension, Settings.SavePath), GetEncoder(Settings.SelectedImageFormat.Format), encParams);
                     bmp.Dispose();
                 }
             }
@@ -45,7 +45,7 @@ namespace Screenshot__
                     EncoderParameters encParams = new EncoderParameters(1);
                     encParams.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, (long)75);
 
-                    bmp.Save(GetNextFileName(AppendTimestamp(Settings.FilePrefix), Settings.SelectedImageFormat.Extension, Settings.SavePath), GetEncoder(Settings.SelectedImageFormat.Format), encParams);
+                    bmp.Save(GetNextFileName(AppendTimestamp(Settings.SavePrefix), Settings.SelectedImageFormat.Extension, Settings.SavePath), GetEncoder(Settings.SelectedImageFormat.Format), encParams);
                     bmp.Dispose();
                 }
             }
