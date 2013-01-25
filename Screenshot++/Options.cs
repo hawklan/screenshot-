@@ -45,11 +45,12 @@ namespace Screenshot__
             }
             if (!txtSavePrefix.Text.Equals(Settings.FilePrefix))
             {
-                if (txtSavePrefix.Text.IndexOfAny(System.IO.Path.GetInvalidFileNameChars()) != -1)
+                if (txtSavePrefix.Text.IndexOfAny(System.IO.Path.GetInvalidFileNameChars()) == -1)
                 {
                     Settings.FilePrefix = txtSavePrefix.Text;
                 }
             }
+            this.Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
