@@ -34,7 +34,6 @@
             this.lblSaveFormat = new System.Windows.Forms.Label();
             this.lblSavePrefix = new System.Windows.Forms.Label();
             this.txtSavePrefix = new System.Windows.Forms.TextBox();
-            this.btnHelp = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
             this.lblAbout = new System.Windows.Forms.Label();
@@ -54,8 +53,8 @@
             // 
             // txtSavePath
             // 
-            this.txtSavePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSavePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSavePath.Location = new System.Drawing.Point(16, 30);
             this.txtSavePath.Name = "txtSavePath";
             this.txtSavePath.Size = new System.Drawing.Size(377, 20);
@@ -90,29 +89,18 @@
             // 
             // txtSavePrefix
             // 
-            this.txtSavePrefix.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSavePrefix.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSavePrefix.Location = new System.Drawing.Point(147, 69);
             this.txtSavePrefix.Name = "txtSavePrefix";
             this.txtSavePrefix.Size = new System.Drawing.Size(328, 20);
             this.txtSavePrefix.TabIndex = 5;
             // 
-            // btnHelp
-            // 
-            this.btnHelp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHelp.Location = new System.Drawing.Point(399, 134);
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(75, 23);
-            this.btnHelp.TabIndex = 6;
-            this.btnHelp.Text = "&Help";
-            this.btnHelp.UseVisualStyleBackColor = true;
-            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
-            // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(318, 134);
+            this.btnCancel.Location = new System.Drawing.Point(398, 134);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 7;
@@ -123,7 +111,7 @@
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.Location = new System.Drawing.Point(237, 134);
+            this.btnOK.Location = new System.Drawing.Point(317, 134);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 8;
@@ -172,7 +160,6 @@
             this.Controls.Add(this.lblAbout);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.txtSavePrefix);
             this.Controls.Add(this.lblSavePrefix);
             this.Controls.Add(this.lblSaveFormat);
@@ -198,7 +185,6 @@
         private System.Windows.Forms.Label lblSaveFormat;
         private System.Windows.Forms.Label lblSavePrefix;
         private System.Windows.Forms.TextBox txtSavePrefix;
-        private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Label lblAbout;
