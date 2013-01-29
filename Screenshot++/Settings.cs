@@ -22,14 +22,14 @@ namespace Screenshot__
             }
         }
 
-        public static string SavePath = Environment.CurrentDirectory;
+        public static string SavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), "Screenshot++");
         public static string SavePrefix = "Screenshot++";
         public static List<ImageFormat> ImageFormats = new List<ImageFormat>();
         public static ImageFormat SelectedImageFormat;
 
         public const string Author = "Jason Hutton";
 
-        public const string AppSavePath = "./";
+        public static string AppSavePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Screenshot++");
         public const string SettingsFile = "settings.cfg";
 
         public static void Init()
@@ -142,10 +142,23 @@ namespace Screenshot__
             TextWriter tw;
             //try
             {
-                tw = new StreamWriter(Path.Combine(AppSavePath, SettingsFile));
-                tw.WriteLine(string.Format("{0} {1}", "SavePath", SavePath));
-                tw.WriteLine(string.Format("{0} {1}", "SavePrefix", SavePrefix));
-                tw.Close();
+                if (!Directory.Exists(AppSavePath))
+                    Directory.CreateDirectory(AppSavePath);
+
+                if (Directory.Exists(AppSavePath))
+                {
+                    try
+                    {
+                        tw = new StreamWriter(Path.Combine(AppSavePath, SettingsFile));
+                        tw.WriteLine(string.Format("{0} {1}", "SavePath", SavePath));
+                        tw.WriteLine(string.Format("{0} {1}", "SavePrefix", SavePrefix));
+                        tw.Close();
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        // Do nothing...
+                    }
+                }
             }
             
         }
