@@ -22,6 +22,8 @@ namespace Screenshot__
             cmbFormat.DataSource = Settings.ImageFormats;
             cmbFormat.SelectedItem = Settings.SelectedImageFormat;
             txtSavePrefix.Text = Settings.SavePrefix;
+
+            lblQualityCurrent.Text = trackQuality.Value.ToString();
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -43,8 +45,27 @@ namespace Screenshot__
                     bChanges = true;
                 }
             }
+            Settings.ImageFormat imgFrmt = cmbFormat.SelectedItem as Settings.ImageFormat;
+            if(imgFrmt != null)
+            {
+                for (int i = 0; i < Settings.ImageFormats.Count; i++)
+                {
+                    if (Settings.ImageFormats[i].InternalFormat == imgFrmt.InternalFormat)
+                    {
+                        if(!Settings.ImageFormats[i].Quality.Equals(trackQuality.Value))
+                        {
+                            Settings.ImageFormats[i].Quality = trackQuality.Value;
+
+                            bChanges = true;
+                        }
+                        break; // Only match one.
+                    }
+                }
+            }
+            //if(!trackQuality.Value.Equals(Settings.Save
             if (bChanges)
             {
+
                 Settings.SaveSettings();
             }
             this.Close();
@@ -74,6 +95,16 @@ namespace Screenshot__
                     txtSavePath.Text = folderBrowse.SelectedPath;
                 }
             }
+        }
+
+        private void trackQuality_ValueChanged(object sender, EventArgs e)
+        {
+            lblQualityCurrent.Text = trackQuality.Value.ToString();
+        }
+
+        private void cmbFormat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
